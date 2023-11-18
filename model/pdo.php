@@ -3,13 +3,16 @@
  * Mở kết nối đến CSDL sử dụng PDO
  */
 function pdo_get_connection(){
-    $dburl = "mysql:host=localhost;dbname=duan1;charset=utf8";
-    $username = 'tuanph43477';
-    $password = '';
-
-    $conn = new PDO($dburl, $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $conn;
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=duan1", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    } catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
 }
 /**
  * Thực thi câu lệnh sql thao tác dữ liệu (INSERT, UPDATE, DELETE)
@@ -20,6 +23,7 @@ function pdo_get_connection(){
 function pdo_execute($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
+        // Kết nối đến CSDL
         $conn = pdo_get_connection();
         $stmt = $conn->prepare($sql);
         $stmt->execute($sql_args);
