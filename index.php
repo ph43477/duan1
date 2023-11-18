@@ -6,7 +6,18 @@
         case 'about':
             include "view/about.php";
             break;
-        
+        case 'cart':
+            include "view/cart.php";
+            break;
+        case 'checkout':
+            include "view/checkout.php";
+            break;
+        case 'detail':
+            include "view/detail.php";
+            break;
+        case 'shop':
+            include "view/shop.php";
+            break;
         default:
             include "view/home.php";
             break;
