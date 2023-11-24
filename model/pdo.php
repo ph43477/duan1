@@ -12,8 +12,7 @@ function pdo_get_connection(){
         return $conn;
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
-    }
-}
+    }}
 /**
  * Thực thi câu lệnh sql thao tác dữ liệu (INSERT, UPDATE, DELETE)
  * @param string $sql câu lệnh sql
