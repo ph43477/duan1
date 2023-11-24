@@ -27,9 +27,6 @@
             
            </table>
            </div>
-           <div class="row mb10 ">
-            <a href="?act=bieudo"> <input  class="mr20" type="button" value="XEM BIỂU ĐỒ"></a>
-           </div>
           </form>
          </div>
         </div>

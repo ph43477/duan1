@@ -43,7 +43,7 @@
                             <td><input type="checkbox" name="" id=""></td>
                             <td>' . $idpro . '</td>
                             <td>' . $name . '</td>
-                            <td>' . $price . '</td>
+                            <td>$' . $price . '</td>
                             <td>' . $hinhpath . '</td>
                             <td>' . $mota . '</td>
                             <td>' . $iddm . '</td>

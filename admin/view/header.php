@@ -50,6 +50,15 @@
                 </li>
 
                 <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Quản lí mua hàng <i class="fa fa-angle-down mt-1"></i></a>
+                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                            <a href="index.php?act=giohang" class="dropdown-item">Giỏ hàng</a>
+                            <a href="index.php?act=hoadon" class="dropdown-item">Hóa đơn</a>
+                            <a href="index.php?act=lichsumuahang" class="dropdown-item">Lịch sử mua hàng</a>
+                        </div>
+                </div>
+
+                <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thống kê <i class="fa fa-angle-down mt-1"></i></a>
                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                             <a href="index.php?act=thongkesp" class="dropdown-item">Thống kê sản phẩm</a>

@@ -6,9 +6,10 @@ require_once 'pdo.php';
  * @param String $ten_loai là tên loại
  * @throws PDOException lỗi thêm mới
  */
-function loai_insert($ten_loai){
-    $sql = "INSERT INTO loai(ten_loai) VALUES(?)";
-    pdo_execute($sql, $ten_loai);
+
+ function loai_insert($name){
+    $sql = "INSERT INTO danhmuc(name) VALUES('$name')";
+    pdo_execute($sql);
 }
 /**
  * Cập nhật tên loại
@@ -16,24 +17,32 @@ function loai_insert($ten_loai){
  * @param String $ten_loai là tên loại mới
  * @throws PDOException lỗi cập nhật
  */
-function loai_update($ma_loai, $ten_loai){
-    $sql = "UPDATE loai SET ten_loai=? WHERE ma_loai=?";
-    pdo_execute($sql, $ten_loai, $ma_loai);
+
+ function load_ten_dm($iddm) {
+    if ($iddm > 0) {
+        $sql = "SELECT * FROM danhmuc WHERE iddm=".$iddm;
+        $dm = pdo_query_one($sql);
+        extract($dm);
+        return $name;
+    } else {
+        return "";
+    }
 }
+
 /**
  * Xóa một hoặc nhiều loại
  * @param mix $ma_loai là mã loại hoặc mảng mã loại
  * @throws PDOException lỗi xóa
  */
-function loai_delete($ma_loai){
-    $sql = "DELETE FROM loai WHERE ma_loai=?";
-    if(is_array($ma_loai)){
-        foreach ($ma_loai as $ma) {
+function loai_delete($iddm){
+    $sql = "DELETE FROM danhmuc WHERE iddm=".$iddm;
+    if(is_array($iddm)){
+        foreach ($iddm as $ma) {
             pdo_execute($sql, $ma);
         }
     }
     else{
-        pdo_execute($sql, $ma_loai);
+        pdo_execute($sql, $iddm);
     }
 }
 /**
@@ -42,7 +51,7 @@ function loai_delete($ma_loai){
  * @throws PDOException lỗi truy vấn
  */
 function loai_select_all(){
-    $sql = "SELECT * FROM loai";
+    $sql = "SELECT * FROM danhmuc";
     return pdo_query($sql);
 }
 /**
@@ -51,9 +60,9 @@ function loai_select_all(){
  * @return array mảng chứa thông tin của một loại
  * @throws PDOException lỗi truy vấn
  */
-function loai_select_by_id($ma_loai){
-    $sql = "SELECT * FROM loai WHERE ma_loai=?";
-    return pdo_query_one($sql, $ma_loai);
+function loai_select_by_id($iddm){
+    $sql = "SELECT * FROM danhmuc WHERE iddm=?";
+    return pdo_query_one($sql, $iddm);
 }
 /**
  * Kiểm tra sự tồn tại của một loại
@@ -61,7 +70,7 @@ function loai_select_by_id($ma_loai){
  * @return boolean có tồn tại hay không
  * @throws PDOException lỗi truy vấn
  */
-function loai_exist($ma_loai){
-    $sql = "SELECT count(*) FROM loai WHERE ma_loai=?";
-    return pdo_query_value($sql, $ma_loai) > 0;
+function loai_exist($iddm){
+    $sql = "SELECT count(*) FROM danhmuc WHERE iddm=?";
+    return pdo_query_value($sql, $iddm) > 0;
 }

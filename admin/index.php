@@ -5,6 +5,9 @@
     include "../model/taikhoan.php";
     include "../model/binhluan.php";
     include "../model/thongke.php";
+    include "../model/hoadon.php";
+    include "../model/giohang.php";
+    include "../model/lichsumuahang.php";
 
     include "view/header.php";
 if(isset($_GET["act"])){
@@ -163,7 +166,35 @@ if(isset($_GET["act"])){
                         // hiển thị danh sách các bản ghi trong bảng "danhmuc".
                         include "binhluan/dsbinhluan.php";
                         break;
-                    
+
+                case 'hoadon':
+                    $dshd=loadall_hoadon(0);
+                    include 'muahang/hoadon.php';
+                    break;
+
+                case 'giohang':
+                    $dsgiohang=loadall_giohang(0);
+                    include 'muahang/giohang.php';
+                    break;
+
+                    case 'huydonhang':
+                        // kiểm tra GET "id" có được khai báo và có giá trị lớn hơn 0 hay không. 
+                        if(isset($_GET['iddh'])&&($_GET['iddh']>0)){
+                            $sql="delete from giohang where iddh=".$_GET['iddh'];
+                            pdo_execute($sql);
+                        }
+                        // lấy danh sách các bản ghi trong bảng "danhmuc"
+                        $sql=" select* from giohang order by iddh";
+                        $dsgiohang=pdo_query($sql);
+                        // hiển thị danh sách các bản ghi trong bảng "danhmuc".
+                        include "muahang/giohang.php";
+                        break;
+
+                case 'lichsumuahang':
+                    $lichsu=loadall_lichsumuahang(0);
+                    include 'muahang/lichsumuahang.php';
+                    break;
+
                     case 'thongkedm':
                         $dsthongkedm=thongke_sanpham_danhmuc();
                         include 'thongke/listdanhmuc.php';
