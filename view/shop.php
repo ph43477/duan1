@@ -1,5 +1,25 @@
+<<<<<<< HEAD
+<!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Shop List</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+=======
 <!-- Shop Start -->
 <div class="container-fluid">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-4">
@@ -152,7 +172,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-1.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -179,7 +203,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-2.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -206,7 +234,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-3.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -233,7 +265,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-4.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -260,7 +296,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-5.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -287,7 +327,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-6.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-6.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -314,7 +358,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-7.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-7.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -341,7 +389,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-8.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-8.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -368,7 +420,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
+<<<<<<< HEAD
+                                <img class="img-fluid w-100" src="img/product-9.jpg" alt="">
+=======
                                 <img class="img-fluid w-100" src="view/img/product-9.jpg" alt="">
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -408,4 +464,26 @@
             <!-- Shop Product End -->
         </div>
     </div>
+<<<<<<< HEAD
     <!-- Shop End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+=======
+    <!-- Shop End -->
+>>>>>>> 0ed0d1bad6e9b344b4692ad1825d6b79edffb670

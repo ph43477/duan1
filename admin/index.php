@@ -1,147 +1,235 @@
 <?php
     include "../model/pdo.php";
-    include "header.php";
     include "../model/danhmuc.php";
+    include "../model/sanpham.php";
     include "../model/taikhoan.php";
     include "../model/binhluan.php";
-    include "../model/sanpham.php";
-    include "../model/cart.php";
-    //controller
-    if(isset($_GET['act'])){
-        $act=$_GET['act'];
-        switch ($act) {
+    include "../model/thongke.php";
+    include "../model/hoadon.php";
+    include "../model/giohang.php";
+    include "../model/lichsumuahang.php";
+
+    include "view/header.php";
+if(isset($_GET["act"])){
+    $act=$_GET["act"];
+    switch ($act) {
+        case 'danhmuc':
+            //lấy all danh mục
+            $dsdm=loai_select_all();
+            include "view/danhmuc.php";
+            break;
+
             case 'adddm':
-                //kiểm tra xem ng dùng có click vào nút add hay ko
                 if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-                    $tenloai = $_POST['tenloai'];
-                    insert_danhmuc($tenloai);
-                    $thongbao = "Thêm thành công";           
+                    $name=$_POST['name'];
+                    // thêm bản ghi "$name" vào bảng "danhmuc".
+                    $sql="insert into danhmuc(name) values('$name')";
+                    pdo_execute($sql);
+                    loai_insert($name);
+                    $thongbao="Thành công";
                 }
-                include "danhmuc/add.php";
+                include "view/danhmuc_add.php";
                 break;
-                case 'listdm':
-                    $listdanhmuc = loadall_danhmuc();
-                    include "danhmuc/list.php";
+
+                case "suadm":
+                    if (isset($_GET['iddm']) && $_GET['iddm'] > 0) {
+                        $iddm = intval($_GET['iddm']);
+                        $sql = "SELECT * FROM danhmuc WHERE iddm='".$iddm."'";
+                        $dm = pdo_query_one($sql);
+                    } 
+                    include "view/danhmuc_update.php";
                     break;
+                
+                    case 'updatedm':
+                        if (isset($_POST['capnhat']) && $_POST['capnhat']) {
+                            $name = $_POST['name'];
+                            $iddm = intval($_POST['iddm']);
+                            
+                            $sql = "UPDATE danhmuc SET name='".$name."' WHERE iddm=".$iddm;
+                            pdo_execute($sql);
+                            $thongbao = "Cập nhật thành công";
+                        }
+                        $sql = "SELECT * FROM danhmuc ORDER BY iddm DESC";
+                        $dsdm = pdo_query($sql);
+                        include "view/danhmuc.php";
+                        break;
+                
                 case 'xoadm':
-                    if(isset($_GET['id'])&&($_GET['id']>0)){
-                        delete_danhmuc($_GET['id']);
+                    // kiểm tra GET "id" có được khai báo và có giá trị lớn hơn 0 hay không. 
+                    if(isset($_GET['iddm'])&&($_GET['iddm']>0)){
+                        $sql="delete from danhmuc where iddm=".$_GET['iddm'];
+                        pdo_execute($sql);
                     }
-                    $listdanhmuc = loadall_danhmuc();
-                    include "danhmuc/list.php";
+                    // lấy danh sách các bản ghi trong bảng "danhmuc"
+                    $sql=" select* from danhmuc order by name";
+                    $dsdm=pdo_query($sql);
+                    // hiển thị danh sách các bản ghi trong bảng "danhmuc".
+                    include "view/danhmuc.php";
                     break;
-                case 'suadm':
-                    if(isset($_GET['id'])&&($_GET['id']>0)){
-                        $dm = loadone_danhmuc($_GET['id']);
-                    }
-                    include "danhmuc/update.php";
-                    break;
-                case 'updatedm':
-                    if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-                        $tenloai = $_POST['tenloai'];
-                        $id = $_POST['id'];
-                        update_danhmuc($id, $tenloai);
-                        $thongbao = "Cập nhật thành công";           
-                    }
-                    $listdanhmuc = loadall_danhmuc();
-                    include "danhmuc/list.php";
-                    break;
-                    /* controller sản phẩm */
 
-                    case 'addsp':
-                        //kiểm tra xem ng dùng có click vào nút add hay ko
-                        if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-                            $id_danhmuc = $_POST['id_danhmuc'];
-                            $tensp = $_POST['tensp'];
-                            $giasp = $_POST['giasp'];
-                            $mota = $_POST['mota'];
-                            $hinh = $_FILES['hinh']['name'];
-                            $target_dir = "../upload/";
-                            $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
-                            if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
-                                //echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
-                            } else {
-                                //echo "Sorry, there was an error uploading your file.";
-                            }
-                            insert_sanpham($tensp, $giasp, $mota, $hinh, $id_danhmuc);
-                            $thongbao = "Thêm thành công";           
-                        }
-                        $listdanhmuc = loadall_danhmuc();
-                        include "sanpham/add.php";
-                        break;
-                    case 'listsp':
-                        if(isset($_POST['listloc'])&&($_POST['listloc'])){
-                            $keyword = $_POST['keyword'];
-                            $id_danhmuc = $_POST['id_danhmuc'];
+                case 'sanpham':
+                        if(isset($_POST['clickOK'])&&($_POST['clickOK'])){
+                            $keyw=$_POST['keyw'];
+                            $iddm=$_POST['iddm'];
                         }else{
-                            $keyword = '';
-                            $id_danhmuc = 0;
+                            $keyw="";
+                            $iddm=0;
                         }
-                            $listdanhmuc = loadall_danhmuc();
-                            $listsanpham = loadall_sanpham($keyword, $id_danhmuc);
-                            include "sanpham/list.php";
-                            break;
-                    case 'xoasp':
-                            if(isset($_GET['id'])&&($_GET['id']>0)){
-                                delete_sanpham($_GET['id']);
-                            }
-                            $listsanpham = loadall_sanpham("", 0);
-                            include "sanpham/list.php";
-                            break;
-                    case 'suasp':
-                            if(isset($_GET['id'])&&($_GET['id']>0)){
-                                $sp = loadone_sanpham($_GET['id']);
-                            }
-                            $listdanhmuc = loadall_danhmuc();
-                            include "sanpham/update.php";
-                            break;
-                    case 'updatesp':
-                            if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
-                            $id = $_POST['id'];
-                            $id_danhmuc = $_POST['id_danhmuc'];
-                            $tensp = $_POST['tensp'];
-                            $giasp = $_POST['giasp'];
-                            $mota = $_POST['mota'];
-                            $hinh = $_FILES['hinh']['name'];
-                            $target_dir = "../upload/";
-                            $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
-                            if (move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file)) {
-                                //echo "The file ". htmlspecialchars( basename( $_FILES["hinh"]["name"])). " has been uploaded.";
-                            } else {
-                                //echo "Sorry, there was an error uploading your file.";
-                            }
-                                update_sanpham($id, $id_danhmuc, $tensp, $giasp, $mota, $hinh);
-                                $thongbao = "Cập nhật thành công";           
-                            }
-                            $listdanhmuc = loadall_danhmuc();
-                            $listsanpham = loadall_sanpham("", 0);
-                            include "sanpham/list.php";
-                            break;
-                    case 'dskh':                       
-                        $listtaikhoan = loadall_taikhoan("", 0);
-                        include "taikhoan/list.php";
-                        break;
-                    case 'dsbl':                       
-                        $listbinhluan = loadall_binhluan(0);
-                        include "binhluan/list.php";
-                        break;
-                    case 'thongke':                       
-                        $listthongke = loadall_thongke();
-                        include "thongke/list.php";
-                        break;
-                    case 'bieudo':                       
-                        $listthongke = loadall_thongke();
-                        include "thongke/bieudo.php";
-                        break;
-            default:
-                include "home.php";
+                        $dsdm= loai_select_all();
+                        $dssp = sanpham_select_all($keyw,$iddm);
+                    include "sanpham/sanpham.php";
+                    break;
+
+                case 'addsp':
+                    if(isset($_POST['themmoi'])&& ($_POST['themmoi'])){
+                        $name = $_POST['name'];
+                        $price = $_POST['price'];
+                        $mota = $_POST['mota'];
+                        $iddm = $_POST['iddm'];
+                        $image = $_FILES['image']['name'];
+    //                    echo $hinh;
+                        $target_dir = "../upload";
+                        $target_file = $target_dir.basename($_FILES['image']['name']);
+    //                    echo $target_file;
+                        if(move_uploaded_file($_FILES['image']['tmp_name'], $target_file)){
+    //                        echo "Bạn đã upload ảnh thành công";
+                        }else{
+    //                        echo "Upload ảnh không thành công";
+                        }
+    //                    echo $iddm;
+                        sanpham_insert($name, $price, $image, $mota, $iddm);
+                        $thanhcong = "Thêm thành công";
+                    }
+    
+                    $dsdm= loai_select_all();
+                    include "sanpham/add.php";
+                    break;
+
+                case "suasp";
+                if(isset($_GET["idpro"])&& ($_GET["idpro"]>0)){
+                    $sanpham= sanpham_select_by_id($_GET['idpro']);
+                }
+                $dsdm=loai_select_all();
+                include "sanpham/update.php";
                 break;
-        }
 
-    }else {
-        include "home.php";
-    } 
+                case "updatesp":
+                    if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
+                        $idpro = $_POST['idpro'];
+                        $name = $_POST['name'];
+                        $price = $_POST['price'];
+                        $mota = $_POST['mota'];
+                        $iddm = $_POST['iddm'];
+                        $image = $_FILES['image']['name'];
+                        $target_dir = "../upload/";
+                        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                            echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+                        } else {
+                            echo "Sorry, there was an error uploading your file.";
+                        }
+                        sanpham_update($idpro, $name, $price, $image, $mota, $iddm);
+                        $thongbao = "Cập nhật thành công!";
+                    }
+                    $dssp = sanpham_select_all("", 0);
+                    $dsdm = loai_select_all();
+                    include "sanpham/sanpham.php";
+                    break;
 
-    include "footer.php";
+                case "xoasp":
+                    if (isset($_GET["idpro"]) && ($_GET["idpro"]>0)) {
+                        sanpham_delete($_GET['idpro']);
+                    }
+                    $dssp = sanpham_select_all('', 0);
+                    include'sanpham/sanpham.php';
+                    break;
+
+                case 'taikhoan':
+                    $dstk = taikhoan_select_all();
+                    include "taikhoan/ds.php";
+                    break;
+
+                case "binhluan":
+                    $dsbl=loadall_binhluan(0);
+                    include "binhluan/dsbinhluan.php";
+                    break;
+
+                    case 'xoabl':
+                        // kiểm tra GET "id" có được khai báo và có giá trị lớn hơn 0 hay không. 
+                        if(isset($_GET['id'])&&($_GET['id']>0)){
+                            $sql="delete from binhluan where id=".$_GET['id'];
+                            pdo_execute($sql);
+                        }
+                        // lấy danh sách các bản ghi trong bảng "danhmuc"
+                        $sql=" select* from binhluan order by noidung";
+                        $dsbl=pdo_query($sql);
+                        // hiển thị danh sách các bản ghi trong bảng "danhmuc".
+                        include "binhluan/dsbinhluan.php";
+                        break;
+
+                case 'hoadon':
+                    $dshd=loadall_hoadon(0);
+                    include 'muahang/hoadon.php';
+                    break;
+
+                case 'giohang':
+                    $dsgiohang=loadall_giohang(0);
+                    include 'muahang/giohang.php';
+                    break;
+
+                    case 'huydonhang':
+                        // kiểm tra GET "id" có được khai báo và có giá trị lớn hơn 0 hay không. 
+                        if(isset($_GET['iddh'])&&($_GET['iddh']>0)){
+                            $sql="delete from giohang where iddh=".$_GET['iddh'];
+                            pdo_execute($sql);
+                        }
+                        // lấy danh sách các bản ghi trong bảng "danhmuc"
+                        $sql=" select* from giohang order by iddh";
+                        $dsgiohang=pdo_query($sql);
+                        // hiển thị danh sách các bản ghi trong bảng "danhmuc".
+                        include "muahang/giohang.php";
+                        break;
+
+                case 'lichsumuahang':
+                    $lichsu=loadall_lichsumuahang(0);
+                    include 'muahang/lichsumuahang.php';
+                    break;
+
+                    case 'thongkedm':
+                        $dsthongkedm=thongke_sanpham_danhmuc();
+                        include 'thongke/listdanhmuc.php';
+                        break;
+
+                    case 'thongkesp':
+                        $dsthongkesp=thongke_sanpham();
+                        include 'thongke/listsanpham.php';
+                        break;
+
+                    case 'thongkebl':
+                        $dsthongkebl=thongke_binhluan();
+                        include 'thongke/listbinhluan.php';
+                        break;
+
+                    case 'bieudodm':
+                        $dsthongke=thongke_sanpham_danhmuc();
+                        include 'thongke/bieudodm.php';
+                        break;
+
+                    case 'bieudosp':
+                        $dsthongkesp=thongke_sanpham();
+                        include 'thongke/bieudosp.php';
+                        break;
+
+        default:
+            include "view/home.php";
+            break;
+    }
+}else{
+    include "view/home.php";
+}
+
+    
+
+    include "view/footer.php";
 
 ?>
